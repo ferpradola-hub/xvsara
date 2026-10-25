@@ -1,0 +1,343 @@
+/* --- VARIABLES Y RESET --- */
+:root {
+    --night-blue: #071B3A;
+    --sapphire: #174A8B;
+    --silver: #C0C7D1;
+    --pearl: #F8F7F4;
+    --font-titles: 'Playfair Display', serif;
+    --font-text: 'Montserrat', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-text);
+    /* Fondo con luz central sutil en lugar de un color sólido */
+    background: radial-gradient(circle at top center, #ffffff 0%, var(--pearl) 100%);
+    color: var(--night-blue);
+    overflow-x: hidden;
+}
+
+/* --- UTILIDADES --- */
+.hidden { display: none !important; }
+.section {
+    padding: 70px 20px;
+    text-align: center;
+    max-width: 600px; 
+    margin: 0 auto;
+    position: relative;
+}
+
+/* --- SECCIONES OSCURAS (Lujo Veneciano) --- */
+.dark-bg {
+    /* Fondo con efecto de iluminación tipo foco de escenario */
+    background: radial-gradient(circle at center, var(--sapphire) 0%, #041024 100%);
+    color: var(--pearl);
+    border-top: 3px double var(--silver);
+    border-bottom: 3px double var(--silver);
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.6);
+    position: relative;
+    margin-top: 20px;
+}
+
+/* Estrella ornamental plateada entre secciones */
+.dark-bg::before {
+    content: '✧';
+    font-size: 35px;
+    color: var(--silver);
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--night-blue);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--silver);
+    box-shadow: 0 0 15px rgba(192,199,209,0.3);
+}
+
+h2 {
+    font-family: var(--font-titles);
+    font-size: 2.2rem;
+    color: var(--sapphire);
+    margin-bottom: 25px;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+.dark-bg h2 { 
+    color: var(--silver); 
+    text-shadow: 0 0 10px rgba(192, 199, 209, 0.4);
+}
+
+/* --- BOTONES (Con relieve y brillo) --- */
+.btn-primary, .btn-secondary {
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-family: var(--font-text);
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+    margin-top: 15px;
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+.btn-primary {
+    background: linear-gradient(135deg, var(--sapphire), var(--night-blue));
+    color: var(--pearl);
+    box-shadow: 0 6px 15px rgba(7, 27, 58, 0.5);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.btn-primary:active { transform: translateY(2px); box-shadow: 0 2px 10px rgba(7, 27, 58, 0.5); }
+.btn-secondary {
+    background-color: rgba(255,255,255,0.8);
+    border: 2px solid var(--sapphire);
+    color: var(--sapphire);
+}
+.btn-maps { border-color: #34A853; color: #34A853; }
+.btn-waze { border-color: #33CCFF; color: #071B3A; }
+
+/* --- PANTALLA DE PORTADA --- */
+#intro-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(rgba(7, 27, 58, 0.6), rgba(7, 27, 58, 0.95)), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1080&auto=format&fit=crop') center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    color: var(--silver);
+    text-align: center;
+    transition: opacity 1s ease, transform 1s ease;
+}
+.intro-content { z-index: 2; padding: 30px; background: rgba(0,0,0,0.2); border-radius: 20px; backdrop-filter: blur(5px); border: 1px solid rgba(192,199,209,0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.5);}
+.mask-icon { font-size: 4.5rem; margin-bottom: 15px; animation: float 4s ease-in-out infinite; filter: drop-shadow(0 0 15px rgba(192,199,209,0.5));}
+.subtitle { font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; }
+.title { font-family: var(--font-titles); font-size: 4.5rem; font-style: italic; color: var(--pearl); margin-bottom: 5px; text-shadow: 0 0 20px rgba(255,255,255,0.4);}
+.event-type { font-family: var(--font-titles); font-size: 1.8rem; font-weight: 400; margin-bottom: 25px; color: var(--silver);}
+.date { font-size: 1.2rem; font-weight: 600; letter-spacing: 4px; margin-bottom: 40px; color: var(--pearl); }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* --- MENSAJE --- */
+.text-elegant { font-size: 1.2rem; line-height: 1.9; font-style: italic; margin: 30px 0; color: #333;}
+.dark-bg .text-elegant { color: var(--pearl); }
+.signature { font-family: var(--font-titles); font-size: 2.5rem; color: var(--sapphire); margin-top: 30px; font-style: italic;}
+
+/* --- CONTADOR LÚJOSO (Efecto Cristal y Metal) --- */
+.timer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 40px 0;
+}
+.time-box {
+    background: linear-gradient(145deg, rgba(23,74,139,0.3) 0%, rgba(7,27,58,0.7) 100%);
+    border: 1px solid rgba(192, 199, 209, 0.4);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5), inset 0 0 15px rgba(192, 199, 209, 0.2);
+    border-radius: 8px; /* Bordes menos redondeados, más elegantes */
+    padding: 15px 5px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+}
+/* Destello de luz que pasa por los números */
+.time-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+    transform: skewX(-25deg);
+    animation: shine 5s infinite;
+}
+@keyframes shine {
+    0%, 50% { left: -100%; }
+    100% { left: 200%; }
+}
+.time-box span { 
+    font-size: 2rem; 
+    font-weight: 700; 
+    font-family: var(--font-titles); 
+    display: block; 
+    color: var(--pearl);
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+.time-box p { font-size: 0.65rem; letter-spacing: 2px; margin-top: 8px; color: var(--silver); }
+.event-details p { margin: 12px 0; font-size: 1.1rem; letter-spacing: 1px;}
+.event-details i { color: var(--silver); margin-right: 10px; font-size: 1.2rem;}
+
+/* --- MAPAS Y UBICACIÓN --- */
+.venue-name { font-family: var(--font-titles); font-size: 1.8rem; font-weight: 700; color: var(--sapphire); }
+.address, .reference { margin: 15px 0; line-height: 1.6; color: #444;}
+.map-container { 
+    margin: 30px 0; 
+    border-radius: 10px; 
+    overflow: hidden; 
+    height: 250px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    border: 4px solid var(--silver); /* Marco plateado */
+    padding: 3px;
+    background: var(--night-blue);
+}
+.map-container iframe { width: 100%; height: 100%; border-radius: 5px;}
+
+/* --- DRESS CODE --- */
+.dress-icon { font-size: 3.5rem; color: var(--sapphire); margin-bottom: 20px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));}
+.dress-type { font-size: 1.6rem; font-weight: 700; letter-spacing: 3px; margin-bottom: 15px; color: var(--night-blue);}
+.dress-note { line-height: 1.6; color: #555;}
+
+/* --- CARRUSEL --- */
+.carousel-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 20px;
+    padding: 30px 10px;
+    scrollbar-width: none;
+}
+.carousel-container::-webkit-scrollbar { display: none; }
+.carousel-img {
+    flex: 0 0 80%;
+    max-width: 300px;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 10px;
+    scroll-snap-align: center;
+    border: 5px solid var(--silver); /* Marco de foto lujoso */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    background: var(--pearl);
+    padding: 4px;
+}
+.swipe-hint { font-size: 1rem; color: var(--silver); opacity: 0.9; margin-top: 15px; letter-spacing: 1px;}
+
+/* --- INFO ADICIONAL --- */
+.info-card {
+    background: linear-gradient(to bottom, #ffffff, var(--pearl));
+    padding: 30px 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    text-align: left;
+    border: 1px solid rgba(192,199,209,0.4);
+}
+.info-card hr { border: 0; border-top: 1px dashed var(--silver); margin: 20px 0; }
+
+/* --- LLUVIA DE SOBRES --- */
+.gift-section { position: relative; overflow: hidden; }
+#envelope-rain { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+.falling-envelope {
+    position: absolute;
+    top: -30px;
+    color: var(--silver);
+    font-size: 1.2rem;
+    opacity: 0.5;
+    animation: fall linear infinite;
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
+}
+@keyframes fall {
+    to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+.envelope-container {
+    position: relative;
+    width: 250px;
+    height: 160px;
+    margin: 50px auto 30px;
+    cursor: pointer;
+    z-index: 2;
+    perspective: 1000px;
+}
+.envelope {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #aeb5be, var(--silver));
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+}
+.envelope-front {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom right, #d4d9df, #aeb5be);
+    clip-path: polygon(0 100%, 50% 40%, 100% 100%, 100% 0, 0 0);
+    z-index: 3;
+    border-radius: 0 0 10px 10px;
+    border-top: 1px solid rgba(255,255,255,0.5);
+}
+.envelope-flap {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 65%;
+    background: linear-gradient(to bottom, #e4e7ec, #c0c7d1);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    z-index: 4;
+    transform-origin: top;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.envelope-card {
+    position: absolute;
+    bottom: 15px; left: 15px; right: 15px; height: 120px;
+    background: #fff;
+    border-radius: 5px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid var(--sapphire);
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
+}
+.card-title { font-family: var(--font-titles); color: var(--sapphire); font-size: 1.4rem; }
+.card-name { font-family: var(--font-titles); font-style: italic; font-weight: bold; font-size: 1.1rem;}
+.envelope-hint { margin-top: 25px; font-size: 1rem; animation: float 2s infinite; letter-spacing: 2px; text-transform: uppercase;}
+
+.envelope-container.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
+.envelope-container.open .envelope-card { transform: translateY(-80px); z-index: 5; box-shadow: 0 -10px 20px rgba(0,0,0,0.3); }
+
+/* --- RSVP FORM --- */
+.input-group { margin-bottom: 25px; text-align: left; }
+.input-group label { display: block; font-weight: 600; margin-bottom: 10px; font-size: 0.95rem; color: var(--night-blue);}
+.input-group input, .input-group select, .input-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #bdc3c7;
+    border-radius: 8px;
+    font-family: var(--font-text);
+    font-size: 1rem;
+    background-color: #fafafa;
+    transition: all 0.3s ease;
+}
+.input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+    outline: none; 
+    border-color: var(--sapphire); 
+    box-shadow: 0 0 10px rgba(23, 74, 139, 0.15);
+    background-color: #fff;
+}
+
+/* --- FOOTER --- */
+footer {
+    background: linear-gradient(to bottom, var(--sapphire), var(--night-blue));
+    color: var(--pearl);
+    text-align: center;
+    padding: 50px 20px;
+    border-top: 4px solid var(--silver);
+}
+.mask-icon-small { font-size: 2.5rem; margin-bottom: 15px; filter: drop-shadow(0 0 10px rgba(192,199,209,0.3)); }
+footer p { font-style: italic; font-size: 1.2rem;}
+footer h2 { color: var(--pearl); margin-top: 10px; margin-bottom: 0; font-size: 2.5rem; text-shadow: 0 0 15px rgba(255,255,255,0.2);}
