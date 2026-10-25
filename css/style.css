@@ -1,0 +1,344 @@
+/* --- VARIABLES Y RESET --- */
+:root {
+    --night-blue: #071B3A;
+    --sapphire: #174A8B;
+    --silver: #C0C7D1;
+    --pearl: #F8F7F4;
+    --font-titles: 'Playfair Display', serif;
+    --font-text: 'Montserrat', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-text);
+    /* Fondo unificado de Noche Veneciana (sin cortes) */
+    background: radial-gradient(circle at top, var(--sapphire) 0%, #030b18 60%, #01050a 100%);
+    background-attachment: fixed; /* Hace que el fondo se quede quieto al bajar */
+    color: var(--pearl);
+    overflow-x: hidden;
+}
+
+/* --- UTILIDADES --- */
+.hidden { display: none !important; }
+.section {
+    padding: 60px 20px;
+    text-align: center;
+    max-width: 600px; 
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Línea difuminada elegante entre secciones (reemplaza los cortes duros) */
+.section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(192, 199, 209, 0.2), transparent);
+}
+.section:last-child::after { display: none; } /* Quita la línea en la última sección */
+
+/* --- SECCIONES DIFUMINADAS (Adiós a los bloques oscuros) --- */
+.dark-bg {
+    /* En lugar de un bloque, es un destello difuminado en el fondo */
+    background: radial-gradient(circle at center, rgba(23,74,139,0.15) 0%, transparent 70%);
+    border: none;
+    box-shadow: none;
+    margin-top: 0;
+}
+
+/* Estrella ornamental flotante (sin bordes duros) */
+.dark-bg::before {
+    content: '✧';
+    font-size: 30px;
+    color: rgba(192,199,209,0.8);
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-shadow: 0 0 15px rgba(192,199,209,0.5);
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+h2 {
+    font-family: var(--font-titles);
+    font-size: 2.2rem;
+    color: var(--silver); /* Todo plateado para resaltar en el fondo oscuro */
+    margin-bottom: 25px;
+    font-weight: 700;
+    text-shadow: 0 0 15px rgba(255,255,255,0.2);
+}
+
+/* --- BOTONES (Con relieve y brillo) --- */
+.btn-primary, .btn-secondary {
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-family: var(--font-text);
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+    margin-top: 15px;
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+.btn-primary {
+    background: linear-gradient(135deg, var(--sapphire), #0a2552);
+    color: var(--pearl);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+.btn-primary:active { transform: translateY(2px); box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+.btn-secondary {
+    background-color: rgba(255,255,255,0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--silver);
+    color: var(--pearl);
+}
+
+/* --- PANTALLA DE PORTADA --- */
+#intro-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(rgba(3, 11, 24, 0.5), rgba(3, 11, 24, 0.95)), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1080&auto=format&fit=crop') center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    color: var(--silver);
+    text-align: center;
+    transition: opacity 1.5s ease, transform 1.5s ease;
+}
+.intro-content { z-index: 2; padding: 30px; background: rgba(0,0,0,0.3); border-radius: 20px; backdrop-filter: blur(8px); border: 1px solid rgba(192,199,209,0.15); box-shadow: 0 10px 40px rgba(0,0,0,0.6);}
+.mask-icon { font-size: 4.5rem; margin-bottom: 15px; animation: float 4s ease-in-out infinite; filter: drop-shadow(0 0 15px rgba(192,199,209,0.5));}
+.subtitle { font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; color: var(--silver);}
+.title { font-family: var(--font-titles); font-size: 4.5rem; font-style: italic; color: var(--pearl); margin-bottom: 5px; text-shadow: 0 0 20px rgba(255,255,255,0.4);}
+.event-type { font-family: var(--font-titles); font-size: 1.8rem; font-weight: 400; margin-bottom: 25px; color: var(--sapphire);}
+.date { font-size: 1.2rem; font-weight: 600; letter-spacing: 4px; margin-bottom: 40px; color: var(--pearl); }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* --- MENSAJE --- */
+.text-elegant { font-size: 1.2rem; line-height: 1.9; font-style: italic; margin: 30px 0; color: rgba(248, 247, 244, 0.9);}
+.signature { font-family: var(--font-titles); font-size: 2.5rem; color: var(--silver); margin-top: 30px; font-style: italic;}
+
+/* --- CONTADOR LÚJOSO (Cristal) --- */
+.timer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 40px 0;
+}
+.time-box {
+    background: rgba(255, 255, 255, 0.05); /* Cristal difuminado */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(192, 199, 209, 0.2);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    border-radius: 12px;
+    padding: 15px 5px;
+    position: relative;
+    overflow: hidden;
+}
+.time-box span { 
+    font-size: 2rem; 
+    font-weight: 700; 
+    font-family: var(--font-titles); 
+    display: block; 
+    color: var(--pearl);
+    text-shadow: 0 0 10px rgba(255,255,255,0.4);
+}
+.time-box p { font-size: 0.65rem; letter-spacing: 2px; margin-top: 8px; color: rgba(192,199,209,0.8); }
+.event-details p { margin: 12px 0; font-size: 1.1rem; letter-spacing: 1px;}
+.event-details i { color: var(--silver); margin-right: 10px; font-size: 1.2rem;}
+
+/* --- MAPAS Y UBICACIÓN --- */
+.venue-name { font-family: var(--font-titles); font-size: 1.8rem; font-weight: 700; color: var(--silver); }
+.address, .reference { margin: 15px 0; line-height: 1.6; color: rgba(248, 247, 244, 0.8);}
+.map-container { 
+    margin: 30px 0; 
+    border-radius: 12px; 
+    overflow: hidden; 
+    height: 250px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 1px solid rgba(192,199,209,0.3);
+}
+.map-container iframe { width: 100%; height: 100%; border-radius: 12px; filter: grayscale(30%) contrast(1.2);}
+
+/* --- DRESS CODE --- */
+.dress-icon { font-size: 3.5rem; color: var(--silver); margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(192,199,209,0.3));}
+.dress-type { font-size: 1.6rem; font-weight: 700; letter-spacing: 3px; margin-bottom: 15px; color: var(--pearl);}
+.dress-note { line-height: 1.6; color: rgba(248, 247, 244, 0.8);}
+
+/* --- CARRUSEL --- */
+.carousel-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 20px;
+    padding: 30px 10px;
+    scrollbar-width: none;
+}
+.carousel-container::-webkit-scrollbar { display: none; }
+.carousel-img {
+    flex: 0 0 80%;
+    max-width: 300px;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 15px;
+    scroll-snap-align: center;
+    border: 1px solid rgba(192,199,209,0.3);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+}
+.swipe-hint { font-size: 1rem; color: rgba(192,199,209,0.7); margin-top: 15px; letter-spacing: 1px;}
+
+/* --- INFO ADICIONAL (Efecto Cristal) --- */
+.info-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 30px 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    text-align: left;
+    border: 1px solid rgba(192,199,209,0.15);
+}
+.info-card hr { border: 0; border-top: 1px solid rgba(192,199,209,0.2); margin: 20px 0; }
+.info-card a { color: var(--silver); text-decoration: none; font-weight: bold;}
+
+/* --- LLUVIA DE SOBRES --- */
+.gift-section { position: relative; overflow: hidden; }
+#envelope-rain { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+.falling-envelope {
+    position: absolute;
+    top: -30px;
+    color: var(--silver);
+    font-size: 1.2rem;
+    opacity: 0.3;
+    animation: fall linear infinite;
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));
+}
+@keyframes fall {
+    to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+.envelope-container {
+    position: relative;
+    width: 250px;
+    height: 160px;
+    margin: 50px auto 30px;
+    cursor: pointer;
+    z-index: 2;
+    perspective: 1000px;
+}
+.envelope {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #aeb5be, var(--silver));
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+}
+.envelope-front {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom right, #d4d9df, #aeb5be);
+    clip-path: polygon(0 100%, 50% 40%, 100% 100%, 100% 0, 0 0);
+    z-index: 3;
+    border-radius: 0 0 10px 10px;
+    border-top: 1px solid rgba(255,255,255,0.5);
+}
+.envelope-flap {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 65%;
+    background: linear-gradient(to bottom, #e4e7ec, #c0c7d1);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    z-index: 4;
+    transform-origin: top;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.envelope-card {
+    position: absolute;
+    bottom: 15px; left: 15px; right: 15px; height: 120px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 5px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid var(--sapphire);
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
+}
+.card-title { font-family: var(--font-titles); color: var(--sapphire); font-size: 1.4rem; }
+.card-name { font-family: var(--font-titles); font-style: italic; font-weight: bold; font-size: 1.1rem; color: var(--night-blue);}
+.envelope-hint { margin-top: 25px; font-size: 1rem; animation: float 2s infinite; letter-spacing: 2px; text-transform: uppercase; color: var(--silver);}
+
+.envelope-container.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
+.envelope-container.open .envelope-card { transform: translateY(-80px); z-index: 5; box-shadow: 0 -10px 20px rgba(0,0,0,0.3); }
+
+/* --- RSVP FORM (Cristal Oscuro) --- */
+.input-group { margin-bottom: 25px; text-align: left; }
+.input-group label { display: block; font-weight: 600; margin-bottom: 10px; font-size: 0.95rem; color: var(--silver);}
+.input-group input, .input-group select, .input-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid rgba(192, 199, 209, 0.3);
+    border-radius: 8px;
+    font-family: var(--font-text);
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--pearl);
+    transition: all 0.3s ease;
+}
+.input-group input::placeholder, .input-group textarea::placeholder {
+    color: rgba(192,199,209,0.5);
+}
+.input-group select option {
+    background-color: var(--night-blue);
+    color: var(--pearl);
+}
+.input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+    outline: none; 
+    border-color: var(--silver); 
+    box-shadow: 0 0 15px rgba(192, 199, 209, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* --- FOOTER --- */
+footer {
+    background: transparent; /* Se fusiona con el fondo general */
+    color: var(--pearl);
+    text-align: center;
+    padding: 60px 20px;
+    position: relative;
+}
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20%;
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(192,199,209,0.4), transparent);
+}
+.mask-icon-small { font-size: 2.5rem; margin-bottom: 15px; filter: drop-shadow(0 0 10px rgba(192,199,209,0.3)); }
+footer p { font-style: italic; font-size: 1.2rem; color: rgba(248, 247, 244, 0.8);}
+footer h2 { color: var(--silver); margin-top: 10px; margin-bottom: 0; font-size: 2.5rem; text-shadow: 0 0 15px rgba(255,255,255,0.2);}
