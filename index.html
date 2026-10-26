@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis XV Años | Sara Prado</title>
+    
+    <!-- Fuentes elegantes de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <!-- Iconos de FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- VARIABLES Y RESET --- */
+        :root {
+            --night-blue: #071B3A;
+            --sapphire: #174A8B;
+            --silver: #C0C7D1;
+            --pearl: #F8F7F4;
+            --gold: #D4AF37;
+            --font-titles: 'Playfair Display', serif;
+            --font-text: 'Montserrat', sans-serif;
+            --font-script: 'Great Vibes', cursive;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-text);
+            /* Fondo Veneciano Fijo */
+            background: url('fondo veneciano.jfif') center center / cover no-repeat fixed;
+            color: var(--pearl);
+            overflow-x: hidden;
+        }
+
+        /* --- UTILIDADES --- */
+        .hidden { display: none !important; }
+        .section {
+            padding: 80px 20px; text-align: center; max-width: 600px; 
+            margin: 0 auto; position: relative; z-index: 2;
+        }
+
+        /* --- DIVISORES ESTRELLA --- */
+        .section-divider {
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent); /* Línea dorada */
+            margin: 20px auto; position: relative; 
+        }
+        .section-divider::before {
+            content: '✧';
+            font-size: 50px;
+            color: var(--gold); /* Estrella dorada que hace juego con tu fondo */
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            text-shadow: 0 0 15px rgba(255,255,255,0.8), 0 0 5px var(--night-blue);
+            background: transparent;
+            padding: 0 15px;
+        }
+
+        h2 {
+            font-family: var(--font-titles); font-size: 2.2rem; color: var(--gold); /* Títulos dorados */
+            margin-bottom: 25px; font-weight: 700; text-shadow: 0 0 15px rgba(0,0,0,0.8);
+        }
+
+        /* --- BOTONES --- */
+        .btn-maps {
+            display: inline-block; padding: 15px 25px; border-radius: 30px;
+            font-family: var(--font-text); font-weight: 700; text-decoration: none;
+            width: 100%; max-width: 300px; margin-top: 15px; font-size: 1rem;
+            background-color: #34A853 !important; 
+            color: white !important; border: none !important;
+            box-shadow: 0 5px 15px rgba(52, 168, 83, 0.4); transition: transform 0.3s ease;
+        }
+        .btn-waze {
+            display: inline-block; padding: 15px 25px; border-radius: 30px;
+            font-family: var(--font-text); font-weight: 700; text-decoration: none;
+            width: 100%; max-width: 300px; margin-top: 15px; font-size: 1rem;
+            background-color: #33CCFF !important; 
+            color: #071B3A !important; border: none !important;
+            box-shadow: 0 5px 15px rgba(51, 204, 255, 0.4); transition: transform 0.3s ease;
+        }
+        .btn-whatsapp {
+            display: inline-block; padding: 15px 30px; border-radius: 30px;
+            font-family: var(--font-text); font-weight: 600; text-decoration: none;
+            width: 100%; max-width: 300px; margin-top: 15px; font-size: 1rem; border: none; cursor: pointer;
+            background-color: #25D366 !important;
+            color: white !important;
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4); transition: all 0.3s ease;
+        }
+        .btn-primary {
+            display: inline-block; padding: 15px 30px; border-radius: 30px;
+            font-family: var(--font-text); font-weight: 600; text-decoration: none;
+            width: 100%; max-width: 300px; margin-top: 15px; font-size: 1rem; border: none; cursor: pointer;
+            background: linear-gradient(135deg, var(--sapphire), #0a2552); color: var(--pearl);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease;
+        }
+        .btn-maps:active, .btn-waze:active, .btn-primary:active, .btn-whatsapp:active { transform: translateY(2px); }
+
+        /* --- PANTALLA DE PORTADA --- */
+        #intro-screen {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(3, 11, 24, 0.5), rgba(3, 11, 24, 0.9)), url('15Shoot-29.jpg') center/cover;
+            display: flex; justify-content: center; align-items: center; z-index: 1000;
+            color: var(--silver); text-align: center; transition: opacity 1.5s ease, transform 1.5s ease;
+        }
+        .intro-content { z-index: 2; padding: 30px; background: rgba(0,0,0,0.5); border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.3); box-shadow: 0 10px 40px rgba(0,0,0,0.8);}
+        
+        .mask-icon-img {
+            max-width: 120px; margin-bottom: 15px;
+            animation: float 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+        }
+
+        .subtitle { font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; color: var(--silver);}
+        .title { font-family: var(--font-titles); font-size: 4.5rem; font-style: italic; color: var(--pearl); margin-bottom: 5px; text-shadow: 0 0 25px rgba(255,255,255,0.5);}
+        .event-type { font-family: var(--font-titles); font-size: 1.8rem; font-weight: 400; margin-bottom: 25px; color: var(--gold);}
+        .date { font-size: 1.2rem; font-weight: 600; letter-spacing: 4px; margin-bottom: 40px; color: var(--pearl); }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* --- MENSAJE --- */
+        .text-elegant { font-size: 1.2rem; line-height: 1.9; font-style: italic; margin: 30px 0; color: rgba(248, 247, 244, 1); text-shadow: 0 2px 4px rgba(0,0,0,0.8);}
+        .signature { font-family: var(--font-titles); font-size: 2.5rem; color: var(--gold); margin-top: 30px; font-style: italic;}
+
+        /* --- CONTADOR --- */
+        .timer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 40px 0; }
+        .time-box {
+            background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.3); /* Bordes dorados */
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6); border-radius: 12px; padding: 15px 5px; position: relative; overflow: hidden;
+        }
+        .time-box span { 
+            font-size: 2.2rem; font-weight: 700; font-family: var(--font-titles); display: block; 
+            color: var(--gold); 
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4); 
+        }
+        .time-box p { font-size: 0.65rem; letter-spacing: 2px; margin-top: 8px; color: var(--pearl); }
+
+        /* --- MAPA INCRUSTADO --- */
+        .map-container {
+            margin: 20px 0 30px; border-radius: 12px; overflow: hidden; height: 250px; 
+            border: 1px solid rgba(212,175,55,0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+        .map-container iframe { width: 100%; height: 100%; filter: contrast(1.1); }
+
+        /* --- DRESS CODE --- */
+        .dress-code-card {
+            background: #ffffff; color: #000; padding: 40px 20px; border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8), inset 0 0 0 3px rgba(212,175,55,0.5); /* Borde dorado interior */
+            text-align: center; position: relative; overflow: hidden;
+            max-width: 450px; margin: 0 auto;
+        }
+        .dc-title-1 { font-family: var(--font-script); font-size: 3.5rem; color: #333; line-height: 0.8; margin-bottom: 5px; }
+        .dc-title-2 { font-family: var(--font-titles); font-size: 2rem; letter-spacing: 4px; font-weight: 700; color: #000; margin-bottom: 5px;}
+        .dc-title-3 { font-family: var(--font-text); font-size: 1.2rem; letter-spacing: 8px; color: #555; border-bottom: 1px solid #ccc; padding-bottom: 20px; margin-bottom: 30px; width: 80%; margin-inline: auto;}
+        
+        .dc-columns { display: flex; justify-content: center; gap: 20px; margin-bottom: 30px;}
+        .dc-col { flex: 1; font-family: var(--font-titles); display: flex; flex-direction: column; align-items: center;}
+        
+        .dc-img {
+            width: 80px; height: 80px; object-fit: contain; margin-bottom: 15px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        .dc-col h4 { font-size: 1.2rem; margin-bottom: 10px; font-weight: 700; letter-spacing: 1px;}
+        .dc-col p { font-size: 1rem; color: #444; line-height: 1.5; font-family: var(--font-text); font-weight: 300;}
+
+        .dc-colors-title { font-family: var(--font-titles); font-size: 1.2rem; font-weight: 700; letter-spacing: 2px; margin-bottom: 15px;}
+        .dc-circles { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px;}
+        .dc-circle { width: 35px; height: 35px; border-radius: 50%; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+        .c-black { background-color: #1a1a1a; }
+        .c-navy { background-color: #174A8B; }
+        .c-grey { background-color: #808080; }
+        
+        .dc-footer { font-family: var(--font-script); font-size: 1.6rem; color: #444; margin-bottom: 15px;}
+        .dc-logo { font-family: var(--font-titles); font-size: 2.5rem; font-weight: 700; color: #000; letter-spacing: -2px;}
+
+        /* --- CARRUSEL Y OTRAS CAJAS --- */
+        .carousel-container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 20px; padding: 30px 10px; scrollbar-width: none; }
+        .carousel-container::-webkit-scrollbar { display: none; }
+        .carousel-img { flex: 0 0 80%; max-width: 300px; height: 450px; object-fit: cover; border-radius: 15px; scroll-snap-align: center; border: 2px solid rgba(212,175,55,0.5); box-shadow: 0 15px 30px rgba(0,0,0,0.8); }
+        
+        .info-card { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); padding: 30px 20px; border-radius: 15px; box-shadow: 0 8px 32px rgba(0,0,0,0.6); text-align: left; border: 1px solid rgba(212,175,55,0.3); }
+        .info-card hr { border: 0; border-top: 1px solid rgba(212,175,55,0.3); margin: 20px 0; }
+        .info-card a { color: var(--gold); text-decoration: none; font-weight: bold;}
+
+        /* --- LLUVIA DE SOBRES --- */
+        .gift-section { position: relative; overflow: hidden; }
+        #envelope-rain { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .falling-envelope { position: absolute; top: -30px; color: var(--gold); font-size: 1.2rem; opacity: 0.6; animation: fall linear infinite; filter: drop-shadow(0 0 5px rgba(212,175,55,0.4)); }
+        @keyframes fall { to { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
+
+        .envelope-container { position: relative; width: 250px; height: 160px; margin: 50px auto 30px; cursor: pointer; z-index: 2; perspective: 1000px; }
+        .envelope { position: relative; width: 100%; height: 100%; background: linear-gradient(135deg, #aeb5be, var(--silver)); border-radius: 0 0 10px 10px; box-shadow: 0 15px 30px rgba(0,0,0,0.8); }
+        .envelope-front { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom right, #d4d9df, #aeb5be); clip-path: polygon(0 100%, 50% 40%, 100% 100%, 100% 0, 0 0); z-index: 3; border-radius: 0 0 10px 10px; border-top: 1px solid rgba(255,255,255,0.5); }
+        .envelope-flap { position: absolute; top: 0; left: 0; width: 100%; height: 65%; background: linear-gradient(to bottom, #e4e7ec, #c0c7d1); clip-path: polygon(0 0, 100% 0, 50% 100%); z-index: 4; transform-origin: top; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); border-bottom: 1px solid rgba(0,0,0,0.1); }
+        .envelope-card { position: absolute; bottom: 15px; left: 15px; right: 15px; height: 120px; background: rgba(255,255,255,0.95); border-radius: 5px; z-index: 2; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); border: 2px solid var(--gold); box-shadow: inset 0 0 15px rgba(0,0,0,0.05); }
+        .card-title { font-family: var(--font-titles); color: var(--sapphire); font-size: 1.4rem; }
+        .card-name { font-family: var(--font-titles); font-style: italic; font-weight: bold; font-size: 1.1rem; color: var(--night-blue);}
+        .envelope-hint { margin-top: 25px; font-size: 1rem; animation: float 2s infinite; letter-spacing: 2px; text-transform: uppercase; color: var(--gold);}
+
+        .envelope-container.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
+        .envelope-container.open .envelope-card { transform: translateY(-80px); z-index: 5; box-shadow: 0 -10px 20px rgba(0,0,0,0.5); }
+
+        /* --- RSVP FORM --- */
+        .input-group { margin-bottom: 25px; text-align: left; }
+        .input-group label { display: block; font-weight: 600; margin-bottom: 10px; font-size: 0.95rem; color: var(--gold);}
+        .input-group input, .input-group select, .input-group textarea { width: 100%; padding: 15px; border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 8px; font-family: var(--font-text); font-size: 1rem; background: rgba(0, 0, 0, 0.4); color: var(--pearl); transition: all 0.3s ease; }
+        .input-group input::placeholder, .input-group textarea::placeholder { color: rgba(255,255,255,0.5); }
+        .input-group select option { background-color: var(--night-blue); color: var(--pearl); }
+        .input-group input:focus, .input-group select:focus, .input-group textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); background: rgba(0, 0, 0, 0.6); }
+        
+        /* FOOTER */
+        footer { padding: 60px 20px; text-align: center; }
+        footer h2 { margin-bottom: 0; font-size: 2.5rem; color: var(--gold);}
+    </style>
+</head>
+<body>
+
+    <!-- MÚSICA OCULTA -->
+    <!-- Reemplaza el src="" con el enlace a tu canción MP3 preferida -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="Ma Belle Evangeline - Letra Latino.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- PANTALLA INICIAL (PORTADA) -->
+    <section id="intro-screen">
+        <div class="intro-content">
+            <!-- AQUÍ VA TU MÁSCARA PNG (Reemplaza "tu-mascara.png") -->
+            <img src="mascara.png" alt="Máscara Veneciana" class="mask-icon-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/8207/8207399.png'">
+            
+            <p class="subtitle">Una noche mágica te espera</p>
+            <h1 class="title">Sara Prado</h1>
+            <h2 class="event-type">Mis XV años</h2>
+            <p class="date">14 • 11 • 2026</p>
+            <button id="btn-open" class="btn-primary">Abrir invitación <i class="fa-solid fa-envelope-open-text"></i></button>
+        </div>
+    </section>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main id="main-content" class="hidden">
+        
+        <!-- Mensaje de Invitación -->
+        <section id="message" class="section">
+            <p class="text-elegant">«Hay momentos que se convierten en recuerdos para toda la vida, y hoy quiero compartir uno de los más especiales contigo. Me encantaría que me acompañaras a celebrar mis XV años en una noche llena de magia, elegancia y momentos inolvidables.»</p>
+            <h3 class="signature">Sara Prado</h3>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Cuenta Regresiva -->
+        <section id="countdown-section" class="section">
+            <h2>Faltan</h2>
+            <div id="timer" class="timer-grid">
+                <div class="time-box"><span id="days">00</span><p>DÍAS</p></div>
+                <div class="time-box"><span id="hours">00</span><p>HORAS</p></div>
+                <div class="time-box"><span id="minutes">00</span><p>MINUTOS</p></div>
+                <div class="time-box"><span id="seconds">00</span><p>SEGUNDOS</p></div>
+            </div>
+            <div class="info-card" style="text-align: center;">
+                <p style="margin-bottom:10px;"><i class="fa-regular fa-calendar" style="color:var(--gold);"></i> 14 de Noviembre de 2026</p>
+                <p style="margin-bottom:10px;"><i class="fa-regular fa-clock" style="color:var(--gold);"></i> 18:30 a 24:00 hrs</p>
+                <p><i class="fa-solid fa-location-dot" style="color:var(--gold);"></i> Salon social Santa Rosalia La Laguna</p>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Ubicación con MAPA INCRUSTADO -->
+        <section id="location" class="section">
+            <h2>El lugar donde comienza la magia</h2>
+            <div class="info-card" style="text-align: center; margin-bottom: 20px;">
+                <h3 style="color:var(--gold); font-family: var(--font-titles); margin-bottom:10px;">Santa Rosalia La Laguna</h3>
+                <p>Km 12.5 CAES Santa Rosalia La Laguna, Guatemala.</p>
+                <hr>
+                <p style="font-size: 0.9rem; color:#ddd;"><strong>Referencias:</strong> Se debe de ingresar por CAES, no ingresar por Z.16.</p>
+            </div>
+            
+            <!-- MAPA DE GOOGLE -->
+            <div class="map-container">
+                <iframe src="https://maps.google.com/maps?q=Santa%20Rosalia%20La%20Laguna,%20Guatemala&t=&z=14&ie=UTF8&iwloc=&output=embed" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            </div>
+            
+            <a href="https://maps.app.goo.gl/TH9C3Zt5oKvG1SGj8" target="_blank" class="btn-maps"><i class="fa-solid fa-map-location-dot"></i> Llegar con Google Maps</a>
+            <a href="https://waze.com/ul/h9fxdvkf78" target="_blank" class="btn-waze"><i class="fa-brands fa-waze"></i> Llegar con Waze</a>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- DRESS CODE (Hombres y Mujeres separados) -->
+        <section id="dress-code" class="section">
+            <div class="dress-code-card">
+                <p class="dc-title-1">Codigo de</p>
+                <p class="dc-title-2">VESTIMENTA</p>
+                <p class="dc-title-3">FORMAL</p>
+
+                <div class="dc-columns">
+                    <!-- HOMBRES -->
+                    <div class="dc-col">
+                        <!-- Reemplaza src="imagen-hombres.png" con la tuya -->
+                        <img src="trajehombre.png" alt="Hombres" class="dc-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2957/2957448.png'">
+                        <h4>HOMBRES</h4>
+                        <p>Traje formal</p>
+                    </div>
+                    
+                    <!-- MUJERES -->
+                    <div class="dc-col">
+                        <!-- Reemplaza src="imagen-mujeres.png" con la tuya -->
+                        <img src="formal.png" alt="Mujeres" class="dc-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2957/2957434.png'">
+                        <h4>MUJERES</h4>
+                        <p>Vestido formal<br></p>
+                    </div>
+                </div>
+
+                <p class="dc-colors-title">COLORES RESERVADOS</p>
+                <div class="dc-circles">
+                    <div class="dc-circle c-navy"></div>
+                    <div class="dc-circle c-grey"></div>
+                </div>
+
+                <p class="dc-footer"></p>
+                <p class="dc-logo"></p>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Carrusel de Fotografías -->
+        <section id="gallery" class="section">
+            <h2>Momentos de mi historia</h2>
+            <div class="carousel-container">
+                <img src="IMG_20201024_143030.jpg" class="carousel-img">
+                <img src="IMG_20240329_200707_284.jpg" class="carousel-img">
+                <img src="IMG_20240329_200714_984.jpg" class="carousel-img">
+            </div>
+            <p style="font-size: 0.9rem; color: #ddd; margin-top:10px;"><i class="fa-solid fa-arrows-left-right"></i> Desliza para ver más</p>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Lluvia de Sobres (Sin emoji) -->
+        <section id="gifts" class="section gift-section">
+            <div id="envelope-rain"></div>
+            <h2>Lluvia de sobres</h2>
+            <p class="text-elegant">«Tu presencia es nuestro mejor regalo. Si deseas tener un detalle especial, agradeceremos tu obsequio en efectivo dentro de un sobre.»</p>
+            
+            <div class="envelope-container" id="interactive-envelope">
+                <div class="envelope">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-card">
+                        <p class="card-title">Gracias</p>
+                        <p class="card-name">Sara Prado</p>
+                    </div>
+                    <div class="envelope-front"></div>
+                </div>
+                <p class="envelope-hint">Toca el sobre</p>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Confirmación de Asistencia -->
+        <section id="rsvp" class="section">
+            <h2>¿Me acompañas en esta noche especial?</h2>
+            <div class="info-card">
+                <p style="margin-bottom: 20px; font-size: 0.9rem; color:#ddd;">Por favor confirma de nuevo tu asistencia antes del <strong>Domingo 1 de Noviembre</strong>.</p>
+                <form id="rsvp-form">
+                    <div class="input-group">
+                        <label>Nombre completo o Familia</label>
+                        <input type="text" id="guest-name" placeholder="Ej. Familia Prado" required>
+                    </div>
+                    <div class="input-group">
+                        <label>¿Podrás acompañarme?</label>
+                        <select id="attendance" required>
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="Sí, ahí estaré">Sí, ahí estaré</option>
+                            <option value="Lo siento, no podré asistir">Lo siento, no podré asistir</option>
+                        </select>
+                    </div>
+                    <div class="input-group" id="guests-group">
+                        <label>Número de personas</label>
+                        <input type="number" id="guest-count" min="1" max="10" placeholder="1">
+                    </div>
+                    <div class="input-group" id="companions-group">
+                        <label>Nombres de los acompañantes</label>
+                        <textarea id="companions-names" rows="2" placeholder="Nombres adicionales..."></textarea>
+                    </div>
+                    <!-- Botón WhatsApp color Verde -->
+                    <button type="submit" class="btn-whatsapp">Confirmar por WhatsApp <i class="fa-brands fa-whatsapp"></i></button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="section-divider" style="margin-bottom: 40px;"></div>
+            <p style="font-style: italic; color: #ddd;">Con cariño,</p>
+            <h2>Sara Prado</h2>
+        </footer>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // TRANSICIÓN INICIO Y AUDIO
+            const btnOpen = document.getElementById("btn-open");
+            const introScreen = document.getElementById("intro-screen");
+            const mainContent = document.getElementById("main-content");
+            const bgMusic = document.getElementById("bg-music");
+
+            btnOpen.addEventListener("click", () => {
+                // Iniciar música
+                bgMusic.play().catch(error => console.log("Auto-play prevenido por el navegador", error));
+
+                // Animación de portada
+                introScreen.style.opacity = "0";
+                introScreen.style.transform = "translateY(-50px)";
+                setTimeout(() => {
+                    introScreen.classList.add("hidden");
+                    mainContent.classList.remove("hidden");
+                    window.scrollTo(0, 0);
+                }, 1000);
+            });
+
+            // CUENTA REGRESIVA
+            const eventDate = new Date("Nov 14, 2026 18:30:00 GMT-0600").getTime();
+            const timer = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = eventDate - now;
+                if (distance < 0) {
+                    clearInterval(timer);
+                    document.getElementById("timer").innerHTML = "<h3 style='grid-column: span 4; color: var(--gold);'>¡El momento mágico ha llegado!</h3>";
+                    return;
+                }
+                document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            }, 1000);
+
+            // ANIMACIÓN SOBRE Y LLUVIA
+            const interactiveEnvelope = document.getElementById("interactive-envelope");
+            interactiveEnvelope.addEventListener("click", () => interactiveEnvelope.classList.toggle("open"));
+            
+            const rainContainer = document.getElementById("envelope-rain");
+            setInterval(() => {
+                const env = document.createElement("i");
+                env.classList.add("fa-regular", "fa-envelope", "falling-envelope");
+                env.style.left = Math.random() * 100 + "%";
+                const duration = Math.random() * 3 + 4;
+                env.style.animationDuration = duration + "s";
+                env.style.fontSize = (Math.random() * 0.8 + 0.8) + "rem";
+                rainContainer.appendChild(env);
+                setTimeout(() => env.remove(), duration * 1000);
+            }, 800);
+
+            // FORMULARIO RSVP
+            const rsvpForm = document.getElementById("rsvp-form");
+            const attendanceSelect = document.getElementById("attendance");
+            const guestsGroup = document.getElementById("guests-group");
+            const companionsGroup = document.getElementById("companions-group");
+            
+            attendanceSelect.addEventListener("change", (e) => {
+                const hide = e.target.value === "Lo siento, no podré asistir";
+                guestsGroup.style.display = hide ? "none" : "block";
+                companionsGroup.style.display = hide ? "none" : "block";
+                hide ? document.getElementById("guest-count").removeAttribute("required") : document.getElementById("guest-count").setAttribute("required", "true");
+            });
+
+            rsvpForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const name = document.getElementById("guest-name").value;
+                const attendance = document.getElementById("attendance").value;
+                const count = document.getElementById("guest-count").value;
+                const companions = document.getElementById("companions-names").value;
+                
+                let message = `¡Hola! Te escribo por la invitación a los XV años de Sara Prado.\n\n*Nombre / Familia:* ${name}\n*Respuesta:* ${attendance}\n`;
+                if (attendance !== "Lo siento, no podré asistir") {
+                    message += `*Número de personas:* ${count}\n`;
+                    if (companions.trim() !== "") message += `*Nombres de acompañantes:* ${companions}\n`;
+                }
+                window.open(`https://wa.me/50249760600?text=${encodeURIComponent(message)}`, "_blank");
+            });
+        });
+    </script>
+</body>
+</html>
